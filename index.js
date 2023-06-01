@@ -4,8 +4,8 @@ require('dotenv').config();
 app.use(express.json());
 const {connection} = require("./config/db");
 const {userRoute} = require("./routes/user_route");
-const {flightRoute} = require("./routes/flight_route");
-const {bookingRoute}= require("./routes/booking_route")
+const {restaurantRoute}= require("./routes/restaurant_route");
+const {orderRoute} = require("./routes/order_route");
 const {authenticate}= require("./middleware/authentication")
 
 app.get("/",(req,res)=>{
@@ -15,8 +15,9 @@ app.get("/",(req,res)=>{
 app.use("/api",userRoute);
 app.use(authenticate);
 
-app.use("/api",flightRoute);
-app.use("/api",bookingRoute);
+app.use("/api",restaurantRoute);
+app.use("/api",orderRoute);
+
 
 app.listen(process.env.port,async()=>{
     try {
