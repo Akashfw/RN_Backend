@@ -1,23 +1,23 @@
 const express= require("express");
 const app = express();
 require('dotenv').config();
+const cors = require("cors");
 app.use(express.json());
 const {connection} = require("./config/db");
 const {userRoute} = require("./routes/user_route");
-const {restaurantRoute}= require("./routes/restaurant_route");
-const {orderRoute} = require("./routes/order_route");
+const {postRoute}= require("./routes/post_route");
 const {authenticate}= require("./middleware/authentication")
+
+app.use(cors());
+
 
 app.get("/",(req,res)=>{
     res.send("home page")
 });
 
-app.use("/api",userRoute);
+app.use("/api", userRoute);
 app.use(authenticate);
-
-app.use("/api",restaurantRoute);
-app.use("/api",orderRoute);
-
+app.use("/api", postRoute);
 
 app.listen(process.env.port,async()=>{
     try {

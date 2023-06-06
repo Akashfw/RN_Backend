@@ -7,7 +7,7 @@ const authenticate = (req,res,next)=>{
         if(decode){
             next()
         }else{
-            res.send({"msg":"please login first"});
+            res.status(401).send("Unauthorized")
         }
     }
 };

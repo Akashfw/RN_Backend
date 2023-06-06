@@ -4,13 +4,11 @@ const userSchema= mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  address: {
-    street: String,
-    city: String,
-    state: String,
-    country: String,
-    zip: String
-  }
+  dob: Date,
+  bio: String,
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post', strictPopulate:false }],
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', strictPopulate:false }],
+  friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', strictPopulate:false }]
 });
 
 const Usermodel = mongoose.model("User",userSchema);
